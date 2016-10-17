@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+#region Additional Namespaces for Security
+using ChinookSystem.Security;       //ApplicationUser, ApplicationDbContext, UserManager
+#endregion
+
 public partial class Queries_FirstSample : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -16,6 +20,14 @@ public partial class Queries_FirstSample : System.Web.UI.Page
             {
                 //if not redirect user to the login page
                 Response.Redirect("~/Account/Login.aspx");
+            }
+            else
+            {
+                //are you allowed to be on this page?
+                if (!User.IsInRole(SecurityRoles.WebsiteAdmins))
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
             }
         }
 
