@@ -19,6 +19,6 @@ namespace ChinookSystem.Security
         public string Email { get; set; } //collected from form
         public UnregisteredUserType UserType { get; set; }
 
-
+        
     }
 }
