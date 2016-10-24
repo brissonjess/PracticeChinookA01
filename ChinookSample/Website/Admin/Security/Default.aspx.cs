@@ -15,4 +15,10 @@ public partial class Admin_Default : System.Web.UI.Page
     {
 
     }
+
+    protected void RefreshAll(object sender, EventArgs e)
+    {
+        //refresh the list
+        DataBind();
+    }
 }
