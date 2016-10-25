@@ -10,9 +10,9 @@ namespace ChinookSystem.Security
     {
         Undefined, Employee, Customer
     }
-    class UnregisteredUserProfile
+    public class UnRegisteredUserProfile
     {
-        public string UserId { get; set; } //generated when user added
+        public int UserId { get; set; } //generated when user added
         public string UserName { get; set; } //collected from form
         public string FirstName { get; set; } //comes from user table
         public string LastName { get; set; } //comes from user table
