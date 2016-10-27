@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace ChinookSystem.Security
 {
-    public enum UnregisteredUserType
+    public enum UnRegisteredUserType
     {
         Undefined, Employee, Customer
     }
     public class UnRegisteredUserProfile
     {
-        public int UserId { get; set; } //generated when user added
-        public string UserName { get; set; } //collected from form
+        public int CustomerEmployeeId { get; set; } //generated when user added
+        public string AssignedUserName { get; set; } //collected from form
         public string FirstName { get; set; } //comes from user table
         public string LastName { get; set; } //comes from user table
-        public string Email { get; set; } //collected from form
-        public UnregisteredUserType UserType { get; set; }
+        public string AssignedEmail { get; set; } //collected from form
+        public UnRegisteredUserType UserType { get; set; }
 
         
     }

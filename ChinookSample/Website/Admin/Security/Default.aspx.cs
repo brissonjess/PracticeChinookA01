@@ -49,6 +49,8 @@ public partial class Admin_Default : System.Web.UI.Page
             if(inputControl != null)
             {
                 assignedUserName = inputControl.Text;
+                //Bind("AssignedUserName");
+                //Bind("AssignedEmail");
             }
 
             //SHORT WAY - DONE IN ONE STATEMENT
@@ -64,12 +66,12 @@ public partial class Admin_Default : System.Web.UI.Page
             //NOTE: when using this kind of "new" statement you are passing in parameters, so you use commas (not semicolons) at the end of your statements
             UnRegisteredUserProfile user = new UnRegisteredUserProfile()
             {
-                UserId = int.Parse(UnregisteredUsersGridView.SelectedDataKey.Value.ToString()),
-                UserType = (UnregisteredUserType)Enum.Parse(typeof(UnregisteredUserType), aGridViewRow.Cells[1].Text),
+                CustomerEmployeeId = int.Parse(UnregisteredUsersGridView.SelectedDataKey.Value.ToString()),
+                UserType = (UnRegisteredUserType)Enum.Parse(typeof(UnRegisteredUserType), aGridViewRow.Cells[1].Text),
                 FirstName = aGridViewRow.Cells[2].Text,
                 LastName = aGridViewRow.Cells[3].Text,
-                UserName = assignedUserName,
-                Email = assignedEmail
+                AssignedUserName = assignedUserName,
+                AssignedEmail = assignedEmail
             };
 
             //register the user via the Chinook.UserManager controller
@@ -82,4 +84,36 @@ public partial class Admin_Default : System.Web.UI.Page
 
         }// \ if != null
     }// eom
+
+    protected void UserListView_ItemInserting(object sender, ListViewInsertEventArgs e)
+    {
+        //you need to walk through the checkbox list 
+
+
+        //create the RoleMembership string List<> of selected rows 
+        var addtoroles = new List<string>();
+
+        //point to the physical checkbox list control
+        var roles = e.Item.FindControl("RoleMemberships") as CheckBoxList;
+
+        //does the control exist - safety check 
+        if(roles != null)
+        {
+            //1. cycle through the checkboxlist 
+            foreach(ListItem role in roles.Items)
+            {
+                //2. find roles that were checked 
+                if (role.Selected)
+                {//is it checked?
+                    
+                    //3. add to the List<string>
+                    addtoroles.Add(role.Value);
+                }
+                //4. assign the List<string> to the inserting instance represented by e
+                e.Values["RoleMemberships"] = addtoroles;
+            }
+
+        }
+
+    }
 }
