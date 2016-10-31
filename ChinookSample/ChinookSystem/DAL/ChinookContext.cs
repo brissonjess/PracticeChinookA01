@@ -38,6 +38,7 @@ namespace ChinookSystem.DAL
 
         public DbSet<PlayList> PlayLists { get; set; }
 
+
         //Modelling of our many-to-many relation between Tracks and PlayLists
         //No entity was coded for the physical database table PlaylistTracks
         //This table consists of ONLY Pimary Key/Foreign Key attributes
