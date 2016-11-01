@@ -25,15 +25,37 @@ namespace ChinookSystem.Data.Entities
         //property names should use sql attribute name
         //properties should be listed in the same order
         //     as sql table attributes for easy of maintenance
+
+        /*kinds of entity validation 
+            this is validation that kicks in when the .SaveChange() command if executed
+            - [Required(ErrorMessage="messageHere")]
+            - [StringLength(int maximum[, int optionalMinimum], ErrorMessage="messageHere")]
+            - [Range(double minimum, double maximum, ErrorMessage="messageHere")]
+                --can be used with an int but needs to specified as a double
+                -- double.MaxValue
+            - [RegularExpression("expression", ErrorMessage="messageHere")]
+
+        */
         [Key]
         public int TrackId { get; set; }
+        [Required(ErrorMessage ="Name is a required field")]
+        [StringLength(200, ErrorMessage ="Name is too long. Max characters is 200")]
         public string Name { get; set; }
+        [Range(1.0, double.MaxValue, ErrorMessage ="Invalid Album, try selection again")]
         public int? AlbumId { get; set; }
+        [Required(ErrorMessage = "Media Type is a required field")]
+        [Range(1.0, double.MaxValue, ErrorMessage = "Invalid Media Type, try selection again")]
         public int MediaTypeId { get; set; }
+        [Range(1.0, double.MaxValue, ErrorMessage = "Invalid Genre, try selection again")]
         public int? GenreId { get; set; }
+        [StringLength(220, ErrorMessage = "Name is too long. Max characters is 220")]
         public string Composer { get; set; }
+        [Required(ErrorMessage = "MSec is a required field")]
+        [Range(1.0, double.MaxValue, ErrorMessage = "Invalid, MSec must be greater than 0")]
         public int Milliseconds { get; set; }
         public int? Bytes { get; set; }
+        [Required(ErrorMessage = "UnitPrice is a required field")]
+        [Range(0.0, double.MaxValue, ErrorMessage = "Invalid, UnitPrice must be greater than 0")]
         public decimal UnitPrice { get; set; }
 
         //navigation properties for use by Linq

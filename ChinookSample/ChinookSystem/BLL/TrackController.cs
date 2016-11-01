@@ -46,7 +46,11 @@ namespace ChinookSystem.BLL
             using (var context = new ChinookContext())
             {
                 //any business rules
-
+                /* If you create a business error handle here, it will not get to SaveChanges() and run this again */
+                if(trackinfo.UnitPrice > 1.0m)
+                {
+                    throw new Exception("Bobs your uncle");
+                }
                 //and data refinements
                 //review of using immediate if (iif)
                 //comoser can be a null string, we do not want to store an empt string

@@ -1,9 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="TrackCRUD.aspx.cs" Inherits="Admin_EntityMaintenance_TrackCRUD" %>
 
+<%-- the MessageUserControl control class creates this register tag at the beginning to register a new tag prefix for the tag on the page --%>
+<%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
     <div class="jumbotron">
         <h3>Wired ListView CRUD</h3>
     </div>
+    <%-- error handling control -- found in System Explorer > Website/UserControls --%>
+    <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
+
     <%-- REMEMBER TO ADD: DataKeyNames is your primary key for the listview --%>
     <asp:ListView ID="TrackList" runat="server" DataSourceID="TrackListODS" InsertItemPosition="LastItem" DataKeyNames="TrackId">
         <AlternatingItemTemplate>
@@ -253,7 +260,7 @@
         SelectMethod="ListTracks"
         UpdateMethod="UpdateTrack"
         OldValuesParameterFormatString="original_{0}"
-        TypeName="ChinookSystem.BLL.TrackController" ></asp:ObjectDataSource>
+        TypeName="ChinookSystem.BLL.TrackController" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException" ></asp:ObjectDataSource>
 
     <asp:ObjectDataSource ID="AlbumListODS" runat="server" 
         OldValuesParameterFormatString="original_{0}" 
